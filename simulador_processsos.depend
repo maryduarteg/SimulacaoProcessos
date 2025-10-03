@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1759497788 source:c:\users\mary\desktop\sisinfo\5° termo\so\simulador\simulador_processsos\main.cpp
+	<iostream>
+	<stdio.h>
+	"TAD.h"
+
+1759533363 c:\users\mary\desktop\sisinfo\5° termo\so\simulador\simulador_processsos\tad.h
+	<stdlib.h>
+	<time.h>
+

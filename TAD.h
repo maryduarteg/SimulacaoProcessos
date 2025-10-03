@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-
+//caso o processo não seja filho, então criar o pai dele com -1
 typedef struct pcb
 {
     int cod;
@@ -9,8 +9,9 @@ typedef struct pcb
     int prioridade;
     int bloqueado;
     int tipo_bloqueio;
+    int pai;
     pcb *prox;
-    pbc *listaFilhos;
+    pcb *listaFilhos;
 }PCB;
 
 
@@ -33,12 +34,14 @@ PCB *criar_pcb(int cod, int tempo)
     novo->bloqueado = 0;
     novo->tipo_bloqueio = -1;
     novo->listaFilhos = NULL;
+    novo->pai = -1;
     return novo;
 }
 
 void addFilho(PCB **pai, int cod, int tempo)
 {
     PCB *novo  = criar_pcb(cod,tempo);
+    novo->pai = (*pai)->cod;
     PCB *aux;
     if((*pai)->listaFilhos == NULL)
         (*pai)->listaFilhos = novo;
@@ -82,7 +85,7 @@ PCB *dequeue_fifo(FILA **f)
 
 void enqueue_round(FILA **f, PCB *novo)
 {
-    if((*f)->inicio == null)
+    if((*f)->inicio == NULL)
         (*f)->inicio = (*f)->fim = novo;
     else
     {
@@ -97,7 +100,7 @@ int getTam(FILA *f)
     PCB *aux = f->inicio;
     int tam = 0;
 
-    while(aux != null)
+    while(aux != NULL)
     {
         tam++;
         aux = aux->prox;
@@ -108,7 +111,7 @@ int getTam(FILA *f)
 
 PCB *dequeue_round(FILA **f)
 {
-    int tam = getTam(f);
+    int tam = getTam(*f);
     PCB *aux = (*f)->inicio;
     if(tam == 2)
        (*f)->inicio = (*f)->fim;
